@@ -30,7 +30,16 @@
 - 📌 [Примеры использования](#-примеры-использования)
 - ✅ [TODO](#-todo)
 
----
 
+## ⚡️ Быстрый старт
+1. Клонируйте репозиторий:
+   ```bash
+   git clone https://github.com/username/url-inspector.git
 
+   cd url-inspector
+
+   pip install -r requirements.txt
+
+   uvicorn main:app --reload
+   ```
 
