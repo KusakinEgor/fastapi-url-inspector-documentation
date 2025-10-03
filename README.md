@@ -42,4 +42,5 @@
 
    uvicorn main:app --reload
    ```
+пока не делаю
 
