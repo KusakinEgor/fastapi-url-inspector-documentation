@@ -42,9 +42,9 @@
    ```
 2. Создайте файл .env в корне проекта и укажите параметры окружения:
     ```bash
-    MONGO_URL = "mongodb://localhost:27017"
-    MONGO_DB = "url_inspector"
-    REDIS_URL = "redis://localhost:6379"
+    MONGO_URL = mongodb://localhost:27017
+    MONGO_DB = url_inspector
+    REDIS_URL = redis://localhost:6379
     ```
 3. Запустите Redis - его можно поднять локально или через Docker:
     ```bash
@@ -54,9 +54,33 @@
     # Или через Docker
     docker run -d --name redis -p 6379:6379 redis
     ```
-4. Запустите прилоежние:
+4. Запустите MongoDB - его можно поднять локально или через Docker:
     ```bash
+    # Локальный запуск (если есть MongoDB)
+    mongod --dbpath C:\mongo\data
+
+    # Или через Docker
+    docker run -d --name mongo \ 
+        -p 27017:27017 \
+        -v mongo_data/db \
+         mongo:7
+    ```
+
+5. Запустите прилоежние:
+    ```bash
+    # Локально
     uvicorn app.main:app --reload
+
+    # Или через Docker
+    docker build -t fastapi-url-inspector-app .
+
+    # Запуск контейнера
+    docker run -d --name url-inspector \
+        -p 8000:8000 \
+        --env-file .env \
+        --link mongo:mongo \
+        --link redis:redis \
+        fastapi-url-inspector-app
     ```
 
 ## Docker
